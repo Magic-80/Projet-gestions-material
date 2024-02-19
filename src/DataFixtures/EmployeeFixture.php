@@ -19,7 +19,6 @@ class EmployeeFixture extends Fixture
         $employee->setRoles($faker->text());
         $employee->setUsername($faker->text());
         $employee->setDeactivate($faker->boolean);
-        $employee->setRoles($faker->text());
 
         $manager->persist($employee);
 
