@@ -12,15 +12,17 @@ class EmployeeFixture extends Fixture
     {
         $faker = \Faker\Factory::create("fr_FR");
 
-        $employee = new Employee();
-        $employee->setFirstname($faker->firstName);
-        $employee->setLastname($faker->lastName);
-        $employee->setPassword($faker->password);
-        $employee->setRoles($faker->text());
-        $employee->setUsername($faker->text());
-        $employee->setDeactivate($faker->boolean);
+        for ($i=0; $i < 10; $i++) { 
+            $employee = new Employee();
+            $employee->setFirstname($faker->firstName);
+            $employee->setLastname($faker->lastName);
+            $employee->setPassword($faker->password);
+            $employee->setRoles($faker->jobTitle);
+            $employee->setUsername($faker->userName);
+            $employee->setDeactivate($faker->boolean);
 
-        $manager->persist($employee);
+            $manager->persist($employee);
+        }
 
         $manager->flush();
     }

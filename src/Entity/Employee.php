@@ -33,13 +33,13 @@ class Employee
     #[ORM\Column]
     private ?bool $deactivate = false;
 
-    // #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'manage')]
-    // private Collection $borrowings;
+    #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'manage')]
+    private Collection $borrowings;
 
-    // public function __construct()
-    // {
-    //     $this->borrowings = new ArrayCollection();
-    // }
+    public function __construct()
+    {
+        $this->borrowings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,30 +122,30 @@ class Employee
     /**
      * @return Collection<int, Borrowing>
      */
-    // public function getBorrowings(): Collection
-    // {
-    //     return $this->borrowings;
-    // }
+    public function getBorrowings(): Collection
+    {
+        return $this->borrowings;
+    }
 
-    // public function addBorrowing(Borrowing $borrowing): static
-    // {
-    //     if (!$this->borrowings->contains($borrowing)) {
-    //         $this->borrowings->add($borrowing);
-    //         $borrowing->setManage($this);
-    //     }
+    public function addBorrowing(Borrowing $borrowing): static
+    {
+        if (!$this->borrowings->contains($borrowing)) {
+            $this->borrowings->add($borrowing);
+            $borrowing->setManage($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeBorrowing(Borrowing $borrowing): static
-    // {
-    //     if ($this->borrowings->removeElement($borrowing)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($borrowing->getManage() === $this) {
-    //             $borrowing->setManage(null);
-    //         }
-    //     }
+    public function removeBorrowing(Borrowing $borrowing): static
+    {
+        if ($this->borrowings->removeElement($borrowing)) {
+            // set the owning side to null (unless already changed)
+            if ($borrowing->getManage() === $this) {
+                $borrowing->setManage(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

@@ -12,14 +12,16 @@ class MaterialFixtures extends Fixture
     {
         $faker = \Faker\Factory::create("fr_FR");
 
-        $material = new Material();
-        $material->setName($faker->name);
-        $material->setComment($faker->realText);
-        $material->setLocation($faker->text());
-        $material->setSerialNumber($faker->text());
-        $material->setTagNumber($faker->text());
+        for ($i=0; $i < 20; $i++) { 
+            $material = new Material();
+            $material->setName($faker->word);
+            $material->setComment($faker->realText);    
+            $material->setLocation($faker->locale);
+            $material->setSerialNumber($faker->regexify('[A-Z]{5}[0-4]{3}'));
+            $material->setTagNumber($faker->regexify('[A-Z]{8}[0-2]{5}'));
 
-        $manager->persist($material);
+            $manager->persist($material);
+        }
 
         $manager->flush();
     }

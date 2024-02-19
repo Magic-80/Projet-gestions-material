@@ -12,10 +12,12 @@ class MaterialTypeFixtures extends Fixture
     {
         $faker = \Faker\Factory::create("fr_FR");
 
-        $materialType = new MaterialType();
-        $materialType->setName($faker->name);
+        for ($i=0; $i < 20; $i++) { 
+            $materialType = new MaterialType();
+            $materialType->setName($faker->word);
         
-        $manager->persist($materialType);
+            $manager->persist($materialType);
+        }
 
         $manager->flush();
     }

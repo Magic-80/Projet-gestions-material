@@ -25,13 +25,13 @@ class Student
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $birthdate = null;
 
-    // #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'make')]
-    // private Collection $borrowings;
+    #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'make')]
+    private Collection $borrowings;
 
-    // public function __construct()
-    // {
-    //     $this->borrowings = new ArrayCollection();
-    // }
+    public function __construct()
+    {
+        $this->borrowings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,33 +74,33 @@ class Student
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Borrowing>
-    //  */
-    // public function getBorrowings(): Collection
-    // {
-    //     return $this->borrowings;
-    // }
+    /**
+     * @return Collection<int, Borrowing>
+     */
+    public function getBorrowings(): Collection
+    {
+        return $this->borrowings;
+    }
 
-    // public function addBorrowing(Borrowing $borrowing): static
-    // {
-    //     if (!$this->borrowings->contains($borrowing)) {
-    //         $this->borrowings->add($borrowing);
-    //         $borrowing->setMake($this);
-    //     }
+    public function addBorrowing(Borrowing $borrowing): static
+    {
+        if (!$this->borrowings->contains($borrowing)) {
+            $this->borrowings->add($borrowing);
+            $borrowing->setMake($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeBorrowing(Borrowing $borrowing): static
-    // {
-    //     if ($this->borrowings->removeElement($borrowing)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($borrowing->getMake() === $this) {
-    //             $borrowing->setMake(null);
-    //         }
-    //     }
+    public function removeBorrowing(Borrowing $borrowing): static
+    {
+        if ($this->borrowings->removeElement($borrowing)) {
+            // set the owning side to null (unless already changed)
+            if ($borrowing->getMake() === $this) {
+                $borrowing->setMake(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

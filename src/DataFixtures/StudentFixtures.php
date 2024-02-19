@@ -12,12 +12,14 @@ class StudentFixtures extends Fixture
     {
         $faker = \Faker\Factory::create("fr_FR");
 
-        $student = new Student();
-        $student->setFirstname($faker->firstName);
-        $student->setLastname($faker->lastName);
-        $student->setBirthdate(new \DateTime);
+       for ($i=0; $i < 15; $i++) { 
+            $student = new Student();
+            $student->setFirstname($faker->firstName);
+            $student->setLastname($faker->lastName);
+            $student->setBirthdate(new \DateTime);
 
-        $manager->persist($student);
+            $manager->persist($student);
+       }
 
         $manager->flush();
     }

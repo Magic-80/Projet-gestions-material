@@ -12,13 +12,15 @@ class BorrowingFixtures extends Fixture
     {
         $faker = \Faker\Factory::create("fr_FR");
 
-        $borrowing = new Borrowing();
-        $borrowing->setBorrowAt(new \DateTimeImmutable);
-        $borrowing->setExpectedReturnDate(new \DateTime);
-        $borrowing->setActualReturnDate(new \DateTime);
-        $borrowing->setComment($faker->text());
+        for ($i=0; $i < 20; $i++) { 
+            $borrowing = new Borrowing();
+            $borrowing->setBorrowAt(new \DateTimeImmutable);
+            $borrowing->setExpectedReturnDate(new \DateTime);
+            $borrowing->setActualReturnDate(new \DateTime);
+            $borrowing->setComment($faker->realText);
 
-        $manager->persist($borrowing);
+            $manager->persist($borrowing);
+        }
 
         $manager->flush();
     }

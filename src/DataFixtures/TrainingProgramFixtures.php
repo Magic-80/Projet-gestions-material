@@ -12,11 +12,13 @@ class TrainingProgramFixtures extends Fixture
     {
         $faker = \Faker\Factory::create("fr_FR");
 
-        $training = new TrainingProgram();
-        $training->setName($faker->name);
-        $training->setLevel($faker->text());
+       for ($i=0; $i < 15; $i++) { 
+            $training = new TrainingProgram();
+            $training->setName($faker->name);
+            $training->setLevel($faker->word);
 
-        $manager->persist($training);
+            $manager->persist($training);
+       }
 
         $manager->flush();
     }
