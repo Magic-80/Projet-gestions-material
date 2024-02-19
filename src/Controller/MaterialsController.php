@@ -16,4 +16,12 @@ class MaterialsController extends AbstractController
             'materials' =>$materialRepository->findAll()
         ]);
     }
+
+    #[Route('/materials/detail', name: 'materials_detail')]
+    public function details(MaterialRepository $materialRepository) : Response 
+    {
+        return $this->render('materials/detail.html.twig' , [
+            'materials' =>$materialRepository->findAll()
+        ]);
+    }
 }

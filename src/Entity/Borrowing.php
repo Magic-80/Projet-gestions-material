@@ -14,14 +14,14 @@ class Borrowing
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $borrow_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $borrowAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $expected_return_date = null;
+    private ?\DateTimeInterface $expectedReturnDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $actual_return_date = null;
+    private ?\DateTimeInterface $actualReturnDate = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
@@ -29,52 +29,55 @@ class Borrowing
     #[ORM\ManyToOne(inversedBy: 'borrowings')]
     private ?Employee $manage = null;
 
-    #[ORM\ManyToOne(inversedBy: 'borrowings')]
-    private ?Student $make = null;
+    #[ORM\ManyToOne(inversedBy: 'borrows')]
+    private ?Employee $borrow = null;
 
-    #[ORM\ManyToOne(inversedBy: 'borrowings')]
-    private ?Material $relate_to = null;
+    #[ORM\ManyToOne(inversedBy: 'relatedTo')]
+    private ?Material $relateTo = null;
 
-    #[ORM\ManyToOne(inversedBy: 'borrowings')]
-    private ?TrainingProgram $concern = null;
+    #[ORM\ManyToOne(targetEntity: TrainingProgram::class)]
+    private ?TrainingProgram $trainingProgram = null;
+
+    #[ORM\ManyToOne(targetEntity: Student::class)]
+    private ?Student $student = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getBorrowAt(): ?\DateTimeImmutable
+    public function getBorrowAt(): ?\DateTimeInterface
     {
-        return $this->borrow_at;
+        return $this->borrowAt;
     }
 
-    public function setBorrowAt(?\DateTimeImmutable $borrow_at): static
+    public function setBorrowAt(?\DateTimeInterface $borrowAt): static
     {
-        $this->borrow_at = $borrow_at;
+        $this->borrowAt = $borrowAt;
 
         return $this;
     }
 
     public function getExpectedReturnDate(): ?\DateTimeInterface
     {
-        return $this->expected_return_date;
+        return $this->expectedReturnDate;
     }
 
     public function setExpectedReturnDate(?\DateTimeInterface $expected_return_date): static
     {
-        $this->expected_return_date = $expected_return_date;
+        $this->expectedReturnDate = $expected_return_date;
 
         return $this;
     }
 
     public function getActualReturnDate(): ?\DateTimeInterface
     {
-        return $this->actual_return_date;
+        return $this->actualReturnDate;
     }
 
     public function setActualReturnDate(?\DateTimeInterface $actual_return_date): static
     {
-        $this->actual_return_date = $actual_return_date;
+        $this->actualReturnDate = $actual_return_date;
 
         return $this;
     }
@@ -93,48 +96,60 @@ class Borrowing
 
     public function getManage(): ?Employee
     {
-        return $this->manage;
+    return $this->manage;
     }
 
-    public function setManage(?Employee $manage): static
+    public function setManage(?Employee $manage): self
     {
         $this->manage = $manage;
 
         return $this;
     }
 
-    public function getMake(): ?Student
+    public function getBorrow(): ?Employee
     {
-        return $this->make;
+        return $this->borrow;
     }
 
-    public function setMake(?Student $make): static
+    public function setBorrow(?Employee $borrow): self
     {
-        $this->make = $make;
+        $this->borrow = $borrow;
 
         return $this;
     }
 
     public function getRelateTo(): ?Material
     {
-        return $this->relate_to;
+        return $this->relateTo;
     }
 
-    public function setRelateTo(?Material $relate_to): static
+    public function setRelateTo(?Material $relateTo): self
     {
-        $this->relate_to = $relate_to;
+        $this->relateTo = $relateTo;
 
         return $this;
     }
 
-    public function getConcern(): ?TrainingProgram
+    public function getTrainingProgram(): ?TrainingProgram
     {
-        return $this->concern;
+        return $this->trainingProgram;
     }
 
-    public function setConcern(?TrainingProgram $concern): static
+    public function setTrainingProgram(?TrainingProgram $trainingProgram): self
     {
-        $this->concern = $concern;
+        $this->trainingProgram = $trainingProgram;
+
+        return $this;
+    }
+
+    public function getStudent(): ?Student
+    {
+        return $this->student;
+    }
+
+    public function setStudent(?Student $student): self
+    {
+        $this->student = $student;
 
         return $this;
     }

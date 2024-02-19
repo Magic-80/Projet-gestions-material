@@ -36,9 +36,13 @@ class Employee
     #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'manage')]
     private Collection $borrowings;
 
+    #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'borrow')]
+    private Collection $borrows;
+
     public function __construct()
     {
         $this->borrowings = new ArrayCollection();
+        $this->borrows = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -127,23 +131,26 @@ class Employee
         return $this->borrowings;
     }
 
-    public function addBorrowing(Borrowing $borrowing): static
+    public function addBorrowing(Borrowing $borrowing): self
     {
         if (!$this->borrowings->contains($borrowing)) {
-            $this->borrowings->add($borrowing);
+            $this->borrowings[] = $borrowing;
             $borrowing->setManage($this);
         }
 
         return $this;
     }
 
-    public function removeBorrowing(Borrowing $borrowing): static
+    public function getBorrows(): Collection
     {
-        if ($this->borrowings->removeElement($borrowing)) {
-            // set the owning side to null (unless already changed)
-            if ($borrowing->getManage() === $this) {
-                $borrowing->setManage(null);
-            }
+        return $this->borrows;
+    }
+
+    public function addBorrow(Borrowing $borrow): self
+    {
+        if (!$this->borrows->contains($borrow)) {
+            $this->borrows[] = $borrow;
+            $borrow->setBorrow($this);
         }
 
         return $this;

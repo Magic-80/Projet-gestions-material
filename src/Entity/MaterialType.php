@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MaterialTypeRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MaterialTypeRepository::class)]
@@ -15,6 +16,9 @@ class MaterialType
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\OneToMany(targetEntity: Material::class, mappedBy: 'materialType')]
+    private Collection $materials;
 
     public function getId(): ?int
     {
@@ -31,5 +35,9 @@ class MaterialType
         $this->name = $name;
 
         return $this;
+    }
+    public function getMaterials(): Collection
+    {
+        return $this->materials;
     }
 }

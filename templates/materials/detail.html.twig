@@ -1,19 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MaterialsController!
-{% endblock %}
+{% block title %} Detail Material {% endblock %}
 
 {% block body %}
-
-
 	<section class="material_history">
 		<table>
 			<thead>
 				<tr>
 					<th>Element</th>
 					<th>N° étiquette</th>
-					<th>Date d'emprunt</th>
-					<th>Date de restitution</th>
+					<th>N° de serie</th>
+					<th> Disponibilité </th>
 					<th>Emprunteur</th>
 					<th>Commentaire</th>
 				</tr>
@@ -22,23 +19,15 @@
 				{% for material in materials %}
 					<tr>
 						<td>{{ material.name }}</td>
-						<td>
-							{{material.tagNumber}}
-						</td>
-						<td>
-							{% if material.relatedTo is not empty and material.relatedTo.first.borrowAt is not null %}
-								 {{material.relatedTo.first.borrowAt|date('Y-m-d H:i:s')}} 
+						<td> {{material.tagNumber}} </td>
+						<td> {{material.serialNumber}} </td>
+						<td> 
+							{% if material.relatedTo is not empty %}
+								Disponible
 							{% else %}
-								
+								Pas Disponible
 							{% endif %}
-						</td>
-						<td>
-							{% if material.relatedTo is not empty and material.relatedTo.first.actualReturnDate is not null %}
-								{{material.relatedTo.first.actualReturnDate|date('Y-m-d H:i:s')}} 
-							{% else %}
-								-
-							{% endif %}
-						</td>
+						 </td>
 						<td>
 							{% if material.relatedTo is not empty and material.relatedTo.first.student.firstname %}
 								{{ material.relatedTo.first.student.firstname }}
