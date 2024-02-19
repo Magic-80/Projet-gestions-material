@@ -20,10 +20,10 @@ class Material
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $serial_number = null;
+    private ?string $serialNumber = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $tag_number = null;
+    private ?string $tagNumber = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
@@ -58,24 +58,24 @@ class Material
 
     public function getSerialNumber(): ?string
     {
-        return $this->serial_number;
+        return $this->serialNumber;
     }
 
-    public function setSerialNumber(?string $serial_number): static
+    public function setSerialNumber(?string $serial): static
     {
-        $this->serial_number = $serial_number;
+        $this->serialNumber = $serial;
 
         return $this;
     }
 
     public function getTagNumber(): ?string
     {
-        return $this->tag_number;
+        return $this->tagNumber;
     }
 
-    public function setTagNumber(string $tag_number): static
+    public function setTagNumber(string $tag): static
     {
-        $this->tag_number = $tag_number;
+        $this->tagNumber = $tag;
 
         return $this;
     }
