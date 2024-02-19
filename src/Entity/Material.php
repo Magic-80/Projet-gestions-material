@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\DataFixtures\MaterialTypeFixtures;
 use App\Repository\MaterialRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,10 +21,10 @@ class Material
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $serial_number = null;
+    private ?string $serialNumber = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $tag_number = null;
+    private ?string $tagNumber = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
@@ -31,12 +32,16 @@ class Material
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
-    #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'relate_to')]
-    private Collection $borrowings;
+    #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'relateTo')]
+    private Collection $relatedTo;
+
+    #[ORM\ManyToOne(targetEntity: MaterialType::class)]
+    private ?MaterialType $materialType = null;
+
 
     public function __construct()
     {
-        $this->borrowings = new ArrayCollection();
+        $this->relatedTo = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -58,24 +63,24 @@ class Material
 
     public function getSerialNumber(): ?string
     {
-        return $this->serial_number;
+        return $this->serialNumber;
     }
 
-    public function setSerialNumber(?string $serial_number): static
+    public function setSerialNumber(?string $serial): static
     {
-        $this->serial_number = $serial_number;
+        $this->serialNumber = $serial;
 
         return $this;
     }
 
     public function getTagNumber(): ?string
     {
-        return $this->tag_number;
+        return $this->tagNumber;
     }
 
-    public function setTagNumber(string $tag_number): static
+    public function setTagNumber(string $tag): static
     {
-        $this->tag_number = $tag_number;
+        $this->tagNumber = $tag;
 
         return $this;
     }
@@ -107,30 +112,31 @@ class Material
     /**
      * @return Collection<int, Borrowing>
      */
-    public function getBorrowings(): Collection
+    public function getRelatedTo(): Collection
     {
-        return $this->borrowings;
+        return $this->relatedTo;
     }
 
-    public function addBorrowing(Borrowing $borrowing): static
+    public function addRelatedTo(Borrowing $relatedTo): self
     {
-        if (!$this->borrowings->contains($borrowing)) {
-            $this->borrowings->add($borrowing);
-            $borrowing->setRelateTo($this);
+        if (!$this->relatedTo->contains($relatedTo)) {
+            $this->relatedTo[] = $relatedTo;
+            $relatedTo->setRelateTo($this);
         }
 
         return $this;
     }
 
-    public function removeBorrowing(Borrowing $borrowing): static
+    public function getMaterialType(): ?MaterialType
     {
-        if ($this->borrowings->removeElement($borrowing)) {
-            // set the owning side to null (unless already changed)
-            if ($borrowing->getRelateTo() === $this) {
-                $borrowing->setRelateTo(null);
-            }
-        }
+        return $this->materialType;
+    }
+
+    public function setMaterialType(?MaterialType $materialType): self
+    {
+        $this->materialType = $materialType;
 
         return $this;
     }
+    
 }
