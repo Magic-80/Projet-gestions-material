@@ -26,6 +26,18 @@ class Borrowing
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
 
+    #[ORM\ManyToOne(inversedBy: 'borrowings')]
+    private ?Employee $manage = null;
+
+    #[ORM\ManyToOne(inversedBy: 'borrowings')]
+    private ?Student $make = null;
+
+    #[ORM\ManyToOne(inversedBy: 'borrowings')]
+    private ?Material $relate_to = null;
+
+    #[ORM\ManyToOne(inversedBy: 'borrowings')]
+    private ?TrainingProgram $concern = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +87,54 @@ class Borrowing
     public function setComment(string $comment): static
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getManage(): ?Employee
+    {
+        return $this->manage;
+    }
+
+    public function setManage(?Employee $manage): static
+    {
+        $this->manage = $manage;
+
+        return $this;
+    }
+
+    public function getMake(): ?Student
+    {
+        return $this->make;
+    }
+
+    public function setMake(?Student $make): static
+    {
+        $this->make = $make;
+
+        return $this;
+    }
+
+    public function getRelateTo(): ?Material
+    {
+        return $this->relate_to;
+    }
+
+    public function setRelateTo(?Material $relate_to): static
+    {
+        $this->relate_to = $relate_to;
+
+        return $this;
+    }
+
+    public function getConcern(): ?TrainingProgram
+    {
+        return $this->concern;
+    }
+
+    public function setConcern(?TrainingProgram $concern): static
+    {
+        $this->concern = $concern;
 
         return $this;
     }
