@@ -1,56 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MaterialsController!
+{% block title %}
+	historique des Martériel
 {% endblock %}
+
+{% block titlePage %}
+	<h1>
+		Historique matériel Campus Amiens
+	</h1>
+{% endblock %}
+
 
 {% block body %}
 
 
 	<section class="material_history">
-		<table>
-			<thead>
-				<tr>
-					<th>Element</th>
-					<th>N° étiquette</th>
-					<th>Date d'emprunt</th>
-					<th>Date de restitution</th>
-					<th>Emprunteur</th>
-					<th>Commentaire</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for material in materials %}
+		<div class="table_scroll">
+			<table>
+				<thead>
 					<tr>
-						<td>{{ material.name }}</td>
-						<td>
-							{{material.tagNumber}}
-						</td>
-						<td>
-							{% if material.relatedTo is not empty and material.relatedTo.first.borrowAt is not null %}
-								 {{material.relatedTo.first.borrowAt|date('Y-m-d H:i:s')}} 
-							{% else %}
-								
-							{% endif %}
-						</td>
-						<td>
-							{% if material.relatedTo is not empty and material.relatedTo.first.actualReturnDate is not null %}
-								{{material.relatedTo.first.actualReturnDate|date('Y-m-d H:i:s')}} 
-							{% else %}
-								-
-							{% endif %}
-						</td>
-						<td>
-							{% if material.relatedTo is not empty and material.relatedTo.first.student.firstname %}
-								{{ material.relatedTo.first.student.firstname }}
-							{% else %}
-								-
-							{% endif %}
-						</td>
-						<td>{{ material.comment }}</td>
+						<th>Element</th>
+						<th>N° étiquette</th>
+						<th>Date d'emprunt</th>
+						<th>Date de restitution</th>
+						<th>Emprunteur</th>
+						<th>Commentaire</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for material in materials %}
+						<tr>
+							<td>{{ material.name }}</td>
+							<td class="td_bg_gray">
+								{{material.tagNumber}}
+							</td>
+							<td>
+								{% if material.relatedTo is not empty and material.relatedTo.first.borrowAt is not null %}
+									{{material.relatedTo.first.borrowAt|date('Y-m-d H:i:s')}}
+									{% else %}
 
-	</section>
-{% endblock %}
+								{% endif %}
+							</td>
+							<td class="td_bg_gray">
+								{% if material.relatedTo is not empty and material.relatedTo.first.actualReturnDate is not null %}
+									{{material.relatedTo.first.actualReturnDate|date('Y-m-d H:i:s')}}
+								{% else %}
+									-
+								{% endif %}
+							</td>
+							<td class="td_bg_gray">
+								{% if material.relatedTo is not empty and material.relatedTo.first.student.firstname %}
+									{{ material.relatedTo.first.student.firstname }}
+								{% else %}
+									-
+								{% endif %}
+							</td>
+							<td>{{ material.comment }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		</section>
+	{% endblock %}

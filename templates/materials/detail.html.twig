@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Detail Material {% endblock %}
+{% block title %}  Detail Matériel  {% endblock %}
+
+{% block titlePage %}  <h1> Détail du stock Campus Amiens </h1>   {% endblock %}
 
 {% block body %}
 	<section class="material_history">
-		<table>
+		<div class = "table_scroll">
+			<table>
 			<thead>
 				<tr>
 					<th>Element</th>
@@ -40,6 +43,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		</div>
 
 	</section>
 {% endblock %}
