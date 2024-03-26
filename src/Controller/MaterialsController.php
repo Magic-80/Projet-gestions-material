@@ -16,56 +16,52 @@ class MaterialsController extends AbstractController
     #[Route('/materials', name: 'materials_index')]
     public function index(MaterialRepository $materialRepository): Response
     {
-        return $this->render('materials/index.html.twig' , [
-            'materials' =>$materialRepository->findAll()
+        return $this->render('materials/index.html.twig', [
+            'materials' => $materialRepository->findAll()
         ]);
     }
 
-    #[Route('/materials/detail', name: 'materials_detail')]
-    public function details(MaterialRepository $materialRepository) : Response 
+    #[Route('/materials/details', name: 'materials_detail')]
+    public function details(MaterialRepository $materialRepository): Response
     {
-        return $this->render('materials/detail.html.twig' , [
-            'materials' =>$materialRepository->findAll()
+        return $this->render('materials/detail.html.twig', [
+            'materials' => $materialRepository->findAll()
         ]);
     }
     #[Route('/materials/create', name: 'materials_create')]
-    public function create(Request $request, EntityManagerInterface $entityManager) : Response 
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-       
+
         $material = new Material();
 
         $form = $this->createForm(MaterialFormType::class, $material);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($material);
             $entityManager->flush();
-           return $this->redirectToRoute('materials_index');
+            return $this->redirectToRoute('materials_index');
         }
-        return $this->render('materials/create.html.twig',[
+        return $this->render('materials/create.html.twig', [
             'material_form' => $form
         ]);
     }
-    #[Route('/materials/{id}', name: 'materials_edit')]
-    public function edit(Material $material,Request $request, EntityManagerInterface $entityManager)
+    #[Route('/materials/{id}/edit', name: 'materials_edit')]
+    public function edit(Material $material, Request $request, EntityManagerInterface $entityManager)
     {
-
-        $form = $this->createForm(MaterialFormType::class);
+        $form = $this->createForm(MaterialFormType::class, $material);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $material = $form->getData();
-            $entityManager->persist($material);
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return new Response('Création du nouveau matériel avec succes');
-
+            return $this->redirectToRoute('materials_index');
         }
-        dd($form);
-        return $this->render('materials/edit.html.twig',[
-            'material_form' => $form
+
+        return $this->render('materials/edit.html.twig', [
+            'material_form' => $form->createView(),
         ]);
     }
 }
