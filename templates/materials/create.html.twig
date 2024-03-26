@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Create Material {% endblock %}
+
+{% block body %}
+
+    {{form_start(material_form)}}
+    {{form_widget(material_form)}}
+    {{form_end(material_form)}}
+    
+{% endblock %}
