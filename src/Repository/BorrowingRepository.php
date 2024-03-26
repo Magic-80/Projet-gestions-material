@@ -21,6 +21,8 @@ class BorrowingRepository extends ServiceEntityRepository
         parent::__construct($registry, Borrowing::class);
     }
 
+    
+
 //    /**
 //     * @return Borrowing[] Returns an array of Borrowing objects
 //     */
