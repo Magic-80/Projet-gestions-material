@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Edit Material
+{% endblock %}
+
+{% block body %}
+	<h1>Edit Material</h1>
+
+	{{ form_start(material_form) }}
+	{{ form_row(material_form.name) }}
+	{{ form_row(material_form.serialNumber) }}
+	{{ form_row(material_form.tagNumber) }}
+	{{ form_row(material_form.comment) }}
+	{{ form_row(material_form.location) }}
+	{{ form_row(material_form.materialType) }}
+	{{ form_row(material_form.submit) }}
+	{{ form_end(material_form) }}
+{% endblock %}
