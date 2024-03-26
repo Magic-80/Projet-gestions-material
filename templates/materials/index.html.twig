@@ -36,14 +36,14 @@
 							</td>
 							<td>
 								{% if material.relatedTo is not empty and material.relatedTo.first.borrowAt is not null %}
-									{{material.relatedTo.first.borrowAt|date('Y-m-d H:i:s')}}
+									{{material.relatedTo.first.borrowAt|date('d-m-Y')}}
 									{% else %}
 
 								{% endif %}
 							</td>
 							<td class="td_bg_gray">
 								{% if material.relatedTo is not empty and material.relatedTo.first.actualReturnDate is not null %}
-									{{material.relatedTo.first.actualReturnDate|date('Y-m-d H:i:s')}}
+									{{material.relatedTo.first.actualReturnDate|date('d-m-Y')}}
 								{% else %}
 									-
 								{% endif %}

@@ -27,7 +27,7 @@
                             <li> <a href=""> Matériel </a>  </li>
                             <img class="arrow_img" src="{{asset('icon/arrow_down_icon.svg')}}" alt="arrow down">
                         </div>
-                            <div class="nav_links_dropdown">
+                            <div class="nav_links_dropdown_one">
                                   <a class=" nav_links_dropdown_text " href="{{path('materials_detail')}}"> Stock </a>  
                                    <a class=" nav_links_dropdown_text " href="{{path('materials_index')}}"> Historique </a>  
                             </div>
@@ -36,7 +36,7 @@
                             <li> <a href=""> Utilisateur </a> </li>
                             <img class="arrow_img" src="{{asset('icon/arrow_down_icon.svg')}}" alt="arrow down">
                         </div>
-                        <div class="nav_links_dropdown">
+                        <div class="nav_links_dropdown_two ">
                             <a class=" nav_links_dropdown_text " href=""> Liste </a>  
                             <a class=" nav_links_dropdown_text " href=""> Ajout </a>  
                         </div>
@@ -53,8 +53,10 @@
                     {% block titlePage %}   {% endblock %}
                     <div class = "account_icon">
                         <img src="{{asset('icon/account_icon.svg')}}" alt="logo de login">
-                        <p class = "account_name"> Ameli </p>
-                        <p class = "account_role"> Admin </p>
+                        <div class = "acount_name">
+                            <p class = "account_name"> Name </p>
+                            <span class = "account_role"> role </span>
+                        </div>
                     </div>
                 </div>
                 <div class = "separator">

@@ -8,8 +8,17 @@
   box-sizing: border-box;
 }
 
+.arrow_img{
+  cursor: pointer;
+}
+
+.active{
+  display: none !important;  
+}
+
 .frame_header{
     width: 100%;
+    gap: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,7 +140,16 @@ nav {
   transition: 0.2s all ease-in;
 }
 
-.nav_links_dropdown {
+.nav_links_dropdown_one {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+ 
+}
+
+.nav_links_dropdown_two {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
@@ -161,4 +179,23 @@ li {
 
 a {
   color: white;
+}
+
+.account_icon{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.acount_name{
+  width: 100%;
+  padding-top: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.acount_name span{
+  font-size: 0.8rem;
 }
