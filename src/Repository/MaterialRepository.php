@@ -21,6 +21,15 @@ class MaterialRepository extends ServiceEntityRepository
         parent::__construct($registry, Material::class);
     }
 
+    public function findBySearchTerm(string $searchTerm): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.name LIKE :searchTerm OR m.serialNumber LIKE :searchTerm')
+            ->setParameter('searchTerm', '%' . $searchTerm . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Material[] Returns an array of Material objects
 //     */

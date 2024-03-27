@@ -10,8 +10,31 @@
 
 .arrow_img {
   cursor: pointer;
+  transform: rotate(0deg);
 }
 
+.arrow_img_down {
+  cursor: pointer;
+  transform: rotate(180deg);
+}
+
+.active_dropdown {
+  display: none !important;
+}
+
+@keyframes fade_dropdown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.frame_header {
+  padding-top: 25px;
+
+  
 .active {
   display: none !important;
 }
@@ -62,6 +85,7 @@ table {
 
 .table_scroll {
   display: block;
+  height: 76vh;
   height: 80vh;
   overflow-y: scroll;
 }
@@ -198,6 +222,45 @@ a {
   font-size: 0.8rem;
 }
 
+
+.searchForm{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.search-input {
+  width: 50%;
+  border-radius: 6px;
+  border: 1px solid #5d3ba6;
+  background: #ebf1fc;
+  padding: 6px 7px;
+  color: #8e8f8f;
+}
+
+.search-input::placeholder{
+  padding-left: 25px;
+}
+
+
+.serach_icon{
+  position: absolute;
+  left: 0;
+  padding-left: 25.5%;
+}
+
+.serach_img{
+  width: 18px;
+}
+
+
+.custom-form {
+  padding-top: 10px;
+  width: 45%;
+=======
 /* Gestion Matériel */
 
 .custom-form {
@@ -208,7 +271,7 @@ a {
   border-radius: 6px;
   border: 1px solid #5d3ba6;
   background: #ebf1fc;
-  padding: 6px 7px;
+  padding: 10px 7px;
   color: #8e8f8f;
 }
 
@@ -222,6 +285,14 @@ a {
   background: #ebf1fc;
   padding: 6px 7px;
   color: #8e8f8f;
+}
+
+
+.button_borrowing{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .custom-button {
@@ -271,7 +342,6 @@ a {
   align-items: flex-start;
   padding-left: 60px;
 }
-
 .flex {
   display: flex;
 }

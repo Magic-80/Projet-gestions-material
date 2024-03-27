@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\DataFixtures\MaterialTypeFixtures;
 use App\Repository\MaterialRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -143,6 +144,18 @@ class Material
         $this->materialType = $materialType;
 
         return $this;
+    }
+
+    public function isAvailable(): bool
+    {
+        
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->isNull('returnAt'));
+
+        $currentBorrowings = $this->getRelatedTo()->matching($criteria);
+
+        // Si aucun emprunt en cours, l'objet est disponible
+        return $currentBorrowings->isEmpty();
     }
     
 }
