@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Liste des Utilisateurs
+{% endblock %}
+
+{% block titlePage %}
+	<h1>
+		Liste des utilisateurs
+	</h1>
+{% endblock %}
+
+{% block body %}
+	<section class="user_list">
+		<div class="table_scroll">
+			<table>
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Username</th>
+						<th>Rôles</th>
+						<th>Actions</th>
+						{# Ajout de cette colonne pour les actions #}
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						<tr>
+							<td>{{ user.lastname }}</td>
+							<td>{{ user.firstname }}</td>
+							<td>{{ user.username }}</td>
+							<td>{{ user.roles|join(', ') }}</td>
+							<td>
+								<a class="img-edit" href="{{ path('user_edit', {'id': user.id}) }}"><img src="{{ asset('img/edit-user.png')}}" alt=""></a>
+								{# Lien pour éditer l'utilisateur #}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</section>
+{% endblock %}
