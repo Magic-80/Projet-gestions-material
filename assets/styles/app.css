@@ -77,6 +77,10 @@ body {
   width: 90%;
 }
 
+.user_list{
+  width: 90%;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -86,7 +90,6 @@ table {
 .table_scroll {
   display: block;
   height: 76vh;
-  height: 80vh;
   overflow-y: scroll;
 }
 
