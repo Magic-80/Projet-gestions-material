@@ -10,7 +10,6 @@ use App\Entity\Material;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 class MaterialsController extends AbstractController
@@ -63,8 +62,6 @@ class MaterialsController extends AbstractController
         return new JsonResponse($data);
     }
 
-}
-
 
     #[Route('/materials/create', name: 'materials_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
@@ -104,3 +101,4 @@ class MaterialsController extends AbstractController
         ]);
     }
 }
+
