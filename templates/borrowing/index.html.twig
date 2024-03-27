@@ -10,46 +10,69 @@
 {% endblock %}
 
 {% block body %}
-<div class="edit-mat">
-    <h1>Emprunter du matériel</h1>
+        <div class="edit-mat">
+            <h1>Emprunter/Rendre du matériel</h1>
 
-    {{ form_start(borrowing_form, {'attr': {'class': 'custom-form'}}) }}
+            {{ form_start(borrowing_form, {'attr': {'class': 'custom-form'}}) }}
 
-    <div class="form-group">
-        {{ form_label(borrowing_form.borrowAt, 'Date d\'emprunt') }}
-        {{ form_widget(borrowing_form.borrowAt, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
-    </div>
-    
-    <div class="form-group">
-        {{ form_label(borrowing_form.student, 'Étudiant') }}
-        {{ form_widget(borrowing_form.student, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
-    </div>
+            <div class="form-group">
+                {{ form_label(borrowing_form.relateTo, 'Élément emprunté (n° étiquette)') }}
+                {{ form_widget(borrowing_form.relateTo, {'attr': {'class': 'custom-input'}, 'placeholder': 'Numéro d\'étiquette'}) }}
+            </div>
 
-    <div class="form-group">
-        {{ form_label(borrowing_form.comment, 'Commentaire') }}
-        {{ form_widget(borrowing_form.comment, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
-    </div>
+            <div class="form-group">
+                {{ form_label(borrowing_form.borrow, 'Emprunteur (personne / salle)') }}
+                {{ form_widget(borrowing_form.borrow, {'attr': {'class': 'custom-input'}, 'placeholder': 'Nom de l\'emprunteur'}) }}
+            </div>
 
-    <div class="form-group">
-        {{ form_label(borrowing_form.borrow, 'Emprunteur') }}
-        {{ form_widget(borrowing_form.borrow, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
-    </div>
+            <div class="form-group">
+                {{ form_label(borrowing_form.borrowAt, 'Date d\'emprunt') }}
+                {{ form_widget(borrowing_form.borrowAt, {'attr': {'class': 'custom-input'}, 'placeholder': 'Sélectionnez une date' , 'type' : 'date'} ) }}
+            </div>
 
-    <div class="form-group">
-        {{ form_label(borrowing_form.relateTo, 'Matériel') }}
-        {{ form_widget(borrowing_form.relateTo, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
-    </div>
+            <div class="form-group">
+                {{ form_label(borrowing_form.comment, 'Commentaire') }}
+                {{ form_widget(borrowing_form.comment, {'attr': {'class': 'custom-input'}, 'placeholder': 'Ajoutez un commentaire'}) }}
+            </div>
 
-    <div class="form-group">
-        {{ form_label(borrowing_form.trainingProgram, 'Programme de formation') }}
-        {{ form_widget(borrowing_form.trainingProgram, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
-    </div>
+            <div class="button_borrowing">
+                <button type="submit" class="custom-button"> Ajouter </button>
+            </div>
+
+            {{ form_end(borrowing_form) }}
+        </div>
 
 
-    <button type="submit" class="btn btn-primary">Valider</button>
+        <div class="edit-mat">
+            <h1>Rendre du matériel</h1>
 
-    {{ form_end(borrowing_form) }}
-</div>
+            {{ form_start(returning_form , {'attr': {'class': 'custom-form'}}) }}
 
+            <div class="form-group">
+                {{ form_label(returning_form .relateTo, 'Élément emprunté (n° étiquette)') }}
+                {{ form_widget(returning_form .relateTo, {'attr': {'class': 'custom-input'}, 'placeholder': 'Numéro d\'étiquette'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(returning_form .borrow, 'Emprunteur (personne / salle)') }}
+                {{ form_widget(returning_form .borrow, {'attr': {'class': 'custom-input'}, 'placeholder': 'Nom de l\'emprunteur'}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(returning_form .borrowAt, 'Date de retour') }}
+                {{ form_widget(returning_form .borrowAt, {'attr': {'class': 'custom-input'}, 'placeholder': 'Sélectionnez une date' , 'type' : 'date'} ) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(returning_form .comment, 'Commentaire') }}
+                {{ form_widget(returning_form .comment, {'attr': {'class': 'custom-input'}, 'placeholder': 'Ajoutez un commentaire'}) }}
+            </div>
+
+            <div class="button_borrowing">
+                <button type="submit" class="custom-button"> Ajouter </button>
+            </div>
+
+            {{ form_end(returning_form ) }}
+        </div>
 
 {% endblock %}
