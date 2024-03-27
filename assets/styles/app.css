@@ -33,7 +33,7 @@
 
 .frame_header {
   padding-top: 25px;
-
+}
   
 .active {
   display: none !important;
@@ -260,7 +260,7 @@ a {
 .custom-form {
   padding-top: 10px;
   width: 45%;
-=======
+}
 /* Gestion Matériel */
 
 .custom-form {
