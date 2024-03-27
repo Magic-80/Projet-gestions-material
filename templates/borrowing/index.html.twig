@@ -1,10 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BorrowingReturnController!{% endblock %}
+{% block title %}Hello BorrowingReturnController!
+{% endblock %}
 
-{% block titlePage %}  <h1> Emprunter/Rendre du matériel Campus Amiens </h1>   {% endblock %}
+{% block titlePage %}
+	<h1>
+		Emprunter/Rendre du matériel Campus Amiens
+	</h1>
+{% endblock %}
 
 {% block body %}
+<div class="edit-mat">
+    <h1>Créer un nouvel emprunt</h1>
 
-    
+    {{ form_start(borrowing_form, {'attr': {'class': 'custom-form'}}) }}
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.borrowAt, 'Date d\'emprunt') }}
+        {{ form_widget(borrowing_form.borrowAt, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.expectedReturnDate, 'Date de retour prévue') }}
+        {{ form_widget(borrowing_form.expectedReturnDate, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.actualReturnDate, 'Date de retour réelle') }}
+        {{ form_widget(borrowing_form.actualReturnDate, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.comment, 'Commentaire') }}
+        {{ form_widget(borrowing_form.comment, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.manage, 'Gestionnaire') }}
+        {{ form_widget(borrowing_form.manage, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.borrow, 'Emprunteur') }}
+        {{ form_widget(borrowing_form.borrow, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.relateTo, 'Matériel') }}
+        {{ form_widget(borrowing_form.relateTo, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.trainingProgram, 'Programme de formation') }}
+        {{ form_widget(borrowing_form.trainingProgram, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(borrowing_form.student, 'Étudiant') }}
+        {{ form_widget(borrowing_form.student, {'attr': {'class': 'form-control'}, 'type': 'text'}) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Valider</button>
+
+    {{ form_end(borrowing_form) }}
+</div>
+
 {% endblock %}
