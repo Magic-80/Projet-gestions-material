@@ -8,6 +8,12 @@
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
+		{% if isLoggedIn %}
+			<p>Vous êtes connecté.</p>
+		{% else %}
+			<p>Vous n'êtes pas connecté.</p>
+		{% endif %}
+
 
 		<form action="{{ path('login') }}" method="post">
 			<label for="username">Username:</label>
@@ -18,5 +24,8 @@
 
 			<button type="submit">Login</button>
 		</form>
+		{# <form action="{{ logout_path('app_logout') }}" method="post">
+					<button type="submit">Se déconnecter</button>
+				</form> #}
 	</div>
 {% endblock %}

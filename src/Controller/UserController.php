@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Logout\LogoutUrlGenerator;
 
 class UserController extends AbstractController
 {
@@ -64,12 +65,19 @@ class UserController extends AbstractController
     public function edit(Request $request, Employee $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
+
+        // $user->setRoles(implode(',', $user->getRoles()));
+        var_dump($user->getRoles());
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encoder le mot de passe avant de l'enregistrer en base de données (si nécessaire)
-            $encodedPassword = password_hash($user->getPassword(), PASSWORD_DEFAULT);
-            $user->setPassword($encodedPassword);
+            // Vérifier si le champ password est vide
+            if ($user->getPassword() !== 'none') {
+                // Encoder le mot de passe avant de l'enregistrer en base de données
+                $encodedPassword = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+                $user->setPassword($encodedPassword);
+            }
 
             $this->entityManager->flush();
 
@@ -81,6 +89,7 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     #[Route('/profile/{id}', name: 'profile')]
     public function showProfile(Employee $user, BorrowingRepository $borrowingRepository): Response
     {
@@ -125,16 +134,18 @@ class UserController extends AbstractController
         // Dernier nom d'utilisateur saisi par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $isLoggedIn = $this->getUser() !== null;
+
         return $this->render('user/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
+            'isLoggedIn' => $isLoggedIn,
         ]);
     }
-
-    #[Route('/logout', name: 'logout')]
-    public function logout()
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(LogoutUrlGenerator $logoutUrlGenerator)
     {
-        // Le gestionnaire de déconnexion sera automatiquement géré par Symfony
-        throw new \Exception('Don\'t forget to activate logout in security.yaml');
+        // Cette méthode ne sera jamais exécutée, car la déconnexion est gérée par Symfony
+        throw new \Exception('This should never be reached!');
     }
 }
