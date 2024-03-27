@@ -23,10 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch('/materials/search?searchTerm=' + encodeURIComponent(searchTerm))
                 .then(response => response.json())
                 .then(data => {
-                    // Effacez le contenu précédent du tableau
                     tableBody.innerHTML = '';
 
-                    // Affichez les nouveaux résultats dans le tableau
                     data.forEach(material => {
                         const row = document.createElement('tr');
                         row.innerHTML = `

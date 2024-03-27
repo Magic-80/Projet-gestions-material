@@ -203,7 +203,9 @@ a {
   font-size: 0.8rem;
 }
 
-.scearch {
+
+.searchForm{
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -211,10 +213,26 @@ a {
   padding-bottom: 15px;
 }
 
-.scearch_bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.search-input {
   width: 50%;
-  height: 4vh;
+  border-radius: 6px;
+  border: 1px solid #5d3ba6;
+  background: #ebf1fc;
+  padding: 6px 7px;
+  color: #8e8f8f;
+}
+
+.search-input::placeholder{
+  padding-left: 25px;
+}
+
+
+.serach_icon{
+  position: absolute;
+  left: 0;
+  padding-left: 25.5%;
+}
+
+.serach_img{
+  width: 18px;
 }

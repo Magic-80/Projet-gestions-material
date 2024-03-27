@@ -14,8 +14,11 @@
 {% block body %}
 	<section class="material_history">
 
-		<form id="searchFormDetail" class="search-form">
-            <input type="text" id="searchInputDetail" name="search" class="search-input" placeholder="Search">
+		<form class="searchForm">
+            <input type="search" id="searchInput" name="search" class="search-input" placeholder="Rechercher...">
+		 	<div class = "serach_icon">
+				<img class = "serach_img" src="{{asset("icon/search_icon.svg")}}" alt="search icon">
+			</div>
         </form>
 
 		<div class="table_scroll">
