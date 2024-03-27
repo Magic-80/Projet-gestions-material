@@ -166,20 +166,14 @@ nav {
   transition: 0.2s all ease-in;
 }
 
-.nav_links_dropdown_one {
+.nav_links_dropdown {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   flex-direction: column;
   gap: 20px;
-}
-
-.nav_links_dropdown_two {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 20px;
+  animation-name: fade_dropdown;
+  animation-duration: 0.6s;
 }
 
 .nav_links_dropdown_text {
