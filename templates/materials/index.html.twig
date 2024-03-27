@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	historique des Martériel
+	Historique des Matériels
 {% endblock %}
 
 {% block titlePage %}
@@ -10,10 +10,7 @@
 	</h1>
 {% endblock %}
 
-
 {% block body %}
-
-
 	<section class="material_history">
 		<div class="table_scroll">
 			<table>
@@ -25,25 +22,25 @@
 						<th>Date de restitution</th>
 						<th>Emprunteur</th>
 						<th>Commentaire</th>
+						<th>Actions</th>
+						{# Ajout de cette colonne pour les actions #}
 					</tr>
 				</thead>
 				<tbody>
 					{% for material in materials %}
 						<tr>
 							<td>{{ material.name }}</td>
-							<td class="td_bg_gray">
-								{{material.tagNumber}}
-							</td>
+							<td class="td_bg_gray">{{ material.tagNumber }}</td>
 							<td>
 								{% if material.relatedTo is not empty and material.relatedTo.first.borrowAt is not null %}
-									{{material.relatedTo.first.borrowAt|date('d-m-Y')}}
-									{% else %}
-
+									{{ material.relatedTo.first.borrowAt|date('d-m-Y') }}
+								{% else %}
+									-
 								{% endif %}
 							</td>
 							<td class="td_bg_gray">
 								{% if material.relatedTo is not empty and material.relatedTo.first.actualReturnDate is not null %}
-									{{material.relatedTo.first.actualReturnDate|date('d-m-Y')}}
+									{{ material.relatedTo.first.actualReturnDate|date('d-m-Y') }}
 								{% else %}
 									-
 								{% endif %}
@@ -56,10 +53,14 @@
 								{% endif %}
 							</td>
 							<td>{{ material.comment }}</td>
+							<td>
+								<a class="img-edit" href="{{ path('materials_edit', {'id': material.id}) }}"><img src="{{ asset('img/edit-user.png')}}" alt=""></a>
+							</td>
+							{# Lien pour éditer le matériel #}
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 		</div>
-		</section>
-	{% endblock %}
+	</section>
+{% endblock %}
