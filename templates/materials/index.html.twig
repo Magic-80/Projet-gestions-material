@@ -15,6 +15,11 @@
 
 
 	<section class="material_history">
+
+		 <form id="searchForm">
+            <input type="text" id="searchInput" name="search" class="search-input" placeholder="Search">
+        </form>
+
 		<div class="table_scroll">
 			<table>
 				<thead>
@@ -27,23 +32,21 @@
 						<th>Commentaire</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="table_body ">
 					{% for material in materials %}
 						<tr>
 							<td>{{ material.name }}</td>
-							<td class="td_bg_gray">
-								{{material.tagNumber}}
-							</td>
+							<td class="td_bg_gray">{{ material.tagNumber }}</td>
 							<td>
 								{% if material.relatedTo is not empty and material.relatedTo.first.borrowAt is not null %}
-									{{material.relatedTo.first.borrowAt|date('d-m-Y')}}
-									{% else %}
-
+									{{ material.relatedTo.first.borrowAt|date('d-m-Y') }}
+								{% else %}
+									-
 								{% endif %}
 							</td>
 							<td class="td_bg_gray">
 								{% if material.relatedTo is not empty and material.relatedTo.first.actualReturnDate is not null %}
-									{{material.relatedTo.first.actualReturnDate|date('d-m-Y')}}
+									{{ material.relatedTo.first.actualReturnDate|date('d-m-Y') }}
 								{% else %}
 									-
 								{% endif %}
@@ -61,5 +64,5 @@
 				</tbody>
 			</table>
 		</div>
-		</section>
-	{% endblock %}
+	</section>
+{% endblock %}

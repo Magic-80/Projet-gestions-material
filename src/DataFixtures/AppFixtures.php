@@ -28,7 +28,7 @@ class AppFixtures extends Fixture
  
          // Création d'étudiants
          $students = [];
-         for ($i = 0; $i < 10; $i++) {
+         for ($i = 0; $i < 10; $i++) {  
              $student = new Student();
              $student->setFirstname($faker->firstName);
              $student->setLastname($faker->lastName);
