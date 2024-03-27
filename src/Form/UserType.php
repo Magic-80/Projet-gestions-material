@@ -22,12 +22,8 @@ class UserType extends AbstractType
                 'required' => false, // Rendre le champ non requis
             ])
             ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Role 1' => 'ROLE_1',
-                    'Role 2' => 'ROLE_2',
-                    // Ajoutez d'autres rôles si nécessaire
-                ],
-                'multiple' => true, // Permettre à l'utilisateur de sélectionner plusieurs rôles
+                'choices' => $options['roles'],
+                'multiple' => true, 
                 'attr' => ['class' => 'form-control']
             ])
             ->add('deactivate')
@@ -39,6 +35,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Employee::class,
+            'roles' => ['Admin' => 'Admin', 'Prof' => 'Prof', 'Student' => 'Student'],
         ]);
     }
 }

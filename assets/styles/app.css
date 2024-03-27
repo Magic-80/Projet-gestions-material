@@ -130,7 +130,7 @@ tr:nth-child(even) {
 }
 
 .img-edit img {
-  width: 70%;
+  width: 40%;
 }
 
 .frame {
@@ -258,13 +258,9 @@ a {
   padding-top: 10px;
   width: 45%;
 }
-/* Gestion Matériel */
-
-.custom-form {
-  width: 50%;
-}
 
 .custom-input {
+  width: 100%;
   border-radius: 6px;
   border: 1px solid #5d3ba6;
   background: #ebf1fc;
@@ -341,4 +337,6 @@ a {
 }
 .flex {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }

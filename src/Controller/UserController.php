@@ -25,11 +25,7 @@ class UserController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/user', name: 'user_index')]
-    public function index(): Response
-    {
-        return $this->render('user/index.html.twig');
-    }
+
     #[Route('/users', name: 'user_list')]
     public function list(EmployeeRepository $userRepository): Response
     {
@@ -43,7 +39,10 @@ class UserController extends AbstractController
     public function create(Request $request): Response
     {
         $user = new Employee();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user ,[
+            'roles' => ['Admin' => 'Admin', 'Prof' => 'Prof', 'Student' => 'Student'],
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -67,7 +66,6 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
 
         // $user->setRoles(implode(',', $user->getRoles()));
-        var_dump($user->getRoles());
 
         $form->handleRequest($request);
 

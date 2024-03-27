@@ -1,24 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-	Fiche Profil -
-	{{ user.username }}
+{% block titlePage %}
+	<h1> Fiche Profil  </h1> 
 {% endblock %}
 
 {% block body %}
-	<h1>Fiche Profil -
-		{{ user.username }}</h1>
+<div class = "edit-mat">
+	<h1>Fiche Profil</h1>
 	<form class="custom-form">
-		<div class="form-group row">
-			<label for="lastname" class="col-sm-2 col-form-label">Nom:</label>
-			<div class="col-sm-10">
-				<input type="text" class="custom-input" id="lastname" value="{{ user.lastname }}" readonly>
-			</div>
-		</div>
 		<div class="form-group row">
 			<label for="firstname" class="col-sm-2 col-form-label">Prénom:</label>
 			<div class="col-sm-10">
 				<input type="text" class="custom-input" id="firstname" value="{{ user.firstname }}" readonly>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="lastname" class="col-sm-2 col-form-label">Nom:</label>
+			<div class="col-sm-10">
+				<input type="text" class="custom-input" id="lastname" value="{{ user.lastname }}" readonly>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -30,41 +29,51 @@
 		<div class="form-group row">
 			<label for="roles" class="col-sm-2 col-form-label">Rôle:</label>
 			<div class="col-sm-10">
-				<input type="text" class="custom-input" id="roles" value="{{ user.roles }}" readonly>
+				{% for role in user.roles %}
+					<input type="text" class="custom-input" id="roles" value="{{ role }}" readonly>
+				{% endfor %}
 			</div>
 		</div>
 	</form>
 
 	<h2>Matériaux Empruntés</h2>
 	{% if managedBorrowings is not empty or borrowedBorrowings is not empty %}
-		<table>
-			<thead>
-				<tr>
-					<th>Matériel</th>
-					<th>Date d'emprunt</th>
-					<th>Date de restitution prévue</th>
-					{# Ajoutez d'autres colonnes si nécessaire #}
-				</tr>
-			</thead>
-			<tbody>
-				{% for borrowing in managedBorrowings %}
+			<table>
+				<thead>
 					<tr>
-						<td>{{ borrowing.relateTo.name }}</td>
-						<td>{{ borrowing.borrowAt|date('d-m-Y') }}</td>
-						<td>{{ borrowing.expectedReturnDate|date('d-m-Y') }}</td>
+						<th>Élement</th>
+						<th>N° étiquette</th>
+						<th>Date d'emprunt</th>
+						<th>Date de retour</th>
+						<th>
+							Commentaire</th>
 						{# Ajoutez d'autres colonnes si nécessaire #}
 					</tr>
-				{% endfor %}
-				{% for borrowing in borrowedBorrowings %}
-					<tr>
-						<td>{{ borrowing.relateTo.name }}</td>
-						<td>{{ borrowing.borrowAt|date('d-m-Y') }}</td>
-						<td>{{ borrowing.expectedReturnDate|date('d-m-Y') }}</td>
-						{# Ajoutez d'autres colonnes si nécessaire #}
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for borrowing in managedBorrowings %}
+						<tr>
+							<td>{{ borrowing.relateTo.name }}</td>
+							<td>{{ borrowing.relateTo.tagNumber }}</td>
+							<td>{{ borrowing.borrowAt|date('d-m-Y') }}</td>
+							<td>{{ borrowing.actualReturnDate|date('d-m-Y') }}</td>
+							<td>{{ borrowing.comment }}</td>
+							{# Ajoutez d'autres colonnes si nécessaire #}
+						</tr>
+					{% endfor %}
+					{% for borrowing in borrowedBorrowings %}
+						<tr>
+							<td>{{ borrowing.relateTo.name }}</td>
+							<td>{{ borrowing.relateTo.tagNumber }}</td>
+							<td>{{ borrowing.borrowAt|date('d-m-Y') }}</td>
+							<td>{{ borrowing.actualReturnDate|date('d-m-Y') }}</td>
+							<td>{{ borrowing.comment}}</td>
+							{# Ajoutez d'autres colonnes si nécessaire #}
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+</div>
 	{% else %}
 		<p>Aucun matériel emprunté.</p>
 	{% endif %}

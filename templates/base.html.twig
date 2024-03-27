@@ -1,10 +1,8 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %} Gestion Matériel {% endblock %}</title>
         {% block stylesheets %} {% endblock %}
-
         {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
@@ -28,7 +26,7 @@
                             <img class="arrow_img" src="{{asset('icon/arrow_down_icon.svg')}}" alt="arrow down">
                         </div>
                             <div class="nav_links_dropdown ">
-                                <a class=" nav_links_dropdown_text " href=""> Ajouter </a>  
+                                <a class=" nav_links_dropdown_text " href="{{path('materials_create')}}"> Ajouter </a>  
                                 <a class=" nav_links_dropdown_text " href="{{path('materials_detail')}}"> Stock </a>  
                                 <a class=" nav_links_dropdown_text " href="{{path('materials_index')}}"> Historique </a>  
                             </div>
@@ -38,8 +36,8 @@
                             <img class="arrow_img" src="{{asset('icon/arrow_down_icon.svg')}}" alt="arrow down">
                         </div>
                         <div class="nav_links_dropdown ">
-                            <a class=" nav_links_dropdown_text " href=""> Liste </a>  
-                            <a class=" nav_links_dropdown_text " href=""> Ajout </a>  
+                            <a class=" nav_links_dropdown_text " href="{{path('user_list')}}"> Liste </a>  
+                            <a class=" nav_links_dropdown_text " href="{{path('user_register')}}"> Ajout </a>  
                         </div>
                     </ul>
                  </nav>
