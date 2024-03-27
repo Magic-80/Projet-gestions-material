@@ -1,72 +1,102 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %} Gestion Matériel {% endblock %}</title>
-        {% block stylesheets %} {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}
+				Gestion Matériel
+			{% endblock %}
+		</title>
+		{% block stylesheets %}{% endblock %}
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		<div class="dashboard">
+			<a href="{{path('home')}}">
+				<img src="{{asset('img/laManuImg.svg')}}" alt="logo la manu">
+			</a>
+			<nav>
+				<ul>
+					<div class="nav_links">
+						<img src="{{asset('icon/dashboard_icon.svg')}}" alt="icon dashboard">
+						<li>
+							<a href="{{path('home')}}">
+								Vue d'emsemble
+							</a>
+						</li>
+					</div>
+					<div class="nav_links">
+						<img src="{{asset('icon/borrow_icon.svg')}}" alt="icon dashboard">
+						<li>
+							<a href="">
+								Emprunter / Rendre
+							</a>
+						</li>
+					</div>
+					<div class="nav_links">
+						<img src="{{asset('icon/box_icon.svg')}}" alt="icon dashboard">
+						<li>
+							<a href="">
+								Matériel
+							</a>
+						</li>
+						<img class="arrow_img" src="{{asset('icon/arrow_down_icon.svg')}}" alt="arrow down">
+					</div>
+					<div class="nav_links_dropdown_one">
+						<a class=" nav_links_dropdown_text " href="{{path('materials_detail')}}">
+							Stock
+						</a>
+						<a class=" nav_links_dropdown_text " href="{{path('materials_index')}}">
+							Historique
+						</a>
+					</div>
+					<div class="nav_links">
+						<img src="{{asset('icon/user_icon.svg')}}" alt="icon dashboard">
+						<li>
+							<a href="">
+								Utilisateur
+							</a>
+						</li>
+						<img class="arrow_img" src="{{asset('icon/arrow_down_icon.svg')}}" alt="arrow down">
+					</div>
+					<div class="nav_links_dropdown_two ">
+						<a class=" nav_links_dropdown_text " href="{{path('user_list')}}">
+							Liste
+						</a>
+						<a class=" nav_links_dropdown_text " href="{{path('user_register')}}">
+							Ajout
+						</a>
+					</div>
+				</ul>
+			</nav>
 
-        {% block javascripts %}
-        {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        <div class = "dashboard">
-                <a href="{{path('home')}}"> <img src="{{asset('img/laManuImg.svg')}}" alt="logo la manu">  </a>
-                <nav>
-                    <ul>
-                        <div class = "nav_links">
-                            <img src="{{asset('icon/dashboard_icon.svg')}}" alt="icon dashboard">
-                            <li> <a href="{{path('home')}}"> Vue d'ensemble </a> </li>
-                        </div>
-                        <div class = "nav_links">
-                            <img src="{{asset('icon/borrow_icon.svg')}}" alt="icon dashboard">
-                            <li> <a href="{{path('borrowing_index')}}"> Emprunter / Rendre </a> </li>
-                        </div>
-                        <div class = "nav_links">
-                            <img src="{{asset('icon/box_icon.svg')}}" alt="icon dashboard">
-                            <li> <a href=""> Matériel </a>  </li>
-                            <img class="arrow_img" src="{{asset('icon/arrow_down_icon.svg')}}" alt="arrow down">
-                        </div>
-                            <div class="nav_links_dropdown ">
-                                <a class=" nav_links_dropdown_text " href=""> Ajouter </a>  
-                                <a class=" nav_links_dropdown_text " href="{{path('materials_detail')}}"> Stock </a>  
-                                <a class=" nav_links_dropdown_text " href="{{path('materials_index')}}"> Historique </a>  
-                            </div>
-                        <div class = "nav_links">
-                            <img src="{{asset('icon/user_icon.svg')}}" alt="icon dashboard">
-                            <li> <a href=""> Utilisateur </a> </li>
-                            <img class="arrow_img" src="{{asset('icon/arrow_down_icon.svg')}}" alt="arrow down">
-                        </div>
-                        <div class="nav_links_dropdown ">
-                            <a class=" nav_links_dropdown_text " href=""> Liste </a>  
-                            <a class=" nav_links_dropdown_text " href=""> Ajout </a>  
-                        </div>
-                    </ul>
-                 </nav>
+			<div class="nav_logout_icon">
+				<img src="{{asset('icon/nav_logout_front_icon.svg')}}" alt=" nav logout icon ">
+			</div>
+		</div>
 
-                 <div class="nav_logout_icon">
-                    <img src="{{asset('icon/nav_logout_front_icon.svg')}}" alt=" nav logout icon ">
-                 </div>
-            </div>
-
-            <div class = "frame">
-                <div class = "frame_header">
-                    {% block titlePage %}   {% endblock %}
-                    <div class = "account_icon">
-                        <img src="{{asset('icon/account_icon.svg')}}" alt="logo de login">
-                        <div class = "acount_name">
-                            <p class = "account_name"> Name </p>
-                            <span class = "account_role"> role </span>
-                        </div>
-                    </div>
-                </div>
-                <div class = "separator">
-                     <hr>
-                </div>
-
-                {% block body %}    
-                        
-                {% endblock %}
-            </div>
-    </body>
+		<div class="frame">
+			<div class="frame_header"> {% block titlePage %}{% endblock %}
+				<div class="account_icon">
+					<img src="{{asset('icon/account_icon.svg')}}" alt="logo de login">
+					<div class="acount_name">
+						<p class="account_name">
+							Name
+						</p>
+						<span class="account_role">
+							role
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="separator">
+				<hr>
+			</div>
+			{% block body %}{% endblock %}
+		</div>
+	</body>
 </html>

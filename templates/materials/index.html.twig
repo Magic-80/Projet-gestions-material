@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	historique des Martériel
+	Historique des Matériels
 {% endblock %}
 
 {% block titlePage %}
@@ -10,10 +10,7 @@
 	</h1>
 {% endblock %}
 
-
 {% block body %}
-
-
 	<section class="material_history">
 
 		 <form class="searchForm">
@@ -33,6 +30,8 @@
 						<th>Date de restitution</th>
 						<th>Emprunteur</th>
 						<th>Commentaire</th>
+						<th>Actions</th>
+						{# Ajout de cette colonne pour les actions #}
 					</tr>
 				</thead>
 				<tbody class="table_body ">
@@ -62,6 +61,10 @@
 								{% endif %}
 							</td>
 							<td>{{ material.comment }}</td>
+							<td>
+								<a class="img-edit" href="{{ path('materials_edit', {'id': material.id}) }}"><img src="{{ asset('img/edit-user.png')}}" alt=""></a>
+							</td>
+							{# Lien pour éditer le matériel #}
 						</tr>
 					{% endfor %}
 				</tbody>

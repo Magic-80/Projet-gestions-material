@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Create Material
+{% endblock %}
+
+{% block body %}
+	<div class="edit-mat">
+		<h1>Créer un nouveau matériel</h1>
+
+		{{ form_start(material_form, {'attr': {'class': 'custom-form'}}) }}
+		<div class="form-group">
+			{{ form_label(material_form.name, 'Nom de l\'élément', {'label_attr': {'class': 'required'}}) }}
+            {{ form_widget(material_form.name, {'attr': {'class': 'custom-input'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(material_form.serialNumber, 'Numéro de série', {'label_attr': {'class': 'required'}}) }}
+            {{ form_widget(material_form.serialNumber, {'attr': {'class': 'custom-input'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(material_form.tagNumber, 'Numéro de l\'étiquette', {'label_attr': {'class': 'required'}}) }}
+			{{ form_widget(material_form.tagNumber, {'attr': {'class': 'custom-input'}}) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_label(material_form.comment, 'Commentaire', {'label_attr': {'class': 'required'}}) }}
+			{{ form_widget(material_form.comment, {'attr': {'class': 'custom-input textarea'}}) }}
+		</div>
+
+		<div class="form-group-divid">
+			<div class="form-group-divid2">
+				{{ form_label(material_form.location, 'Mobilité Propriété', {'label_attr': {'class': 'required'}}) }}
+				{{ form_widget(material_form.location, {'attr': {'class': 'custom-input'}}) }}
+			</div>
+			<div class="form-group-divid2">
+				{{ form_label(material_form.materialType, 'Type de matériel', {'label_attr': {'class': 'required'}}) }}
+				{{ form_widget(material_form.materialType, {'attr': {'class': 'custom-select'}}) }}
+			</div>
+		</div>
+
+		<div class="form-group">
+			{{ form_widget(material_form.submit, {'label': 'Créer', 'attr': {'class': 'custom-button'}}) }}
+		</div>
+		{{ form_end(material_form) }}
+	</div>
+{% endblock %}

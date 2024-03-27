@@ -6,9 +6,11 @@ use App\Repository\EmployeeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
-class Employee
+class Employee implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -44,7 +46,32 @@ class Employee
         $this->borrowings = new ArrayCollection();
         $this->borrows = new ArrayCollection();
     }
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
+    }
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
 
+    // Implémentez les autres méthodes de l'interface UserInterface
+    public function getRoles(): array
+    {
+        return explode(',', $this->roles); // Convertir la chaîne de rôles en tableau
+    }
+
+    public function getSalt()
+    {
+        // Vous n'avez pas besoin de salt si vous utilisez bcrypt pour hacher les mots de passe
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        // Supprimez les informations sensibles stockées sur l'utilisateur
+        // Cette méthode est requise par l'interface, mais dans votre cas, vous pouvez la laisser vide
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -86,10 +113,10 @@ class Employee
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
+    // public function getPassword(): ?string
+    // {
+    //     return $this->password;
+    // }
 
     public function setPassword(string $password): static
     {
@@ -98,10 +125,10 @@ class Employee
         return $this;
     }
 
-    public function getRoles(): ?string
-    {
-        return $this->roles;
-    }
+    // public function getRoles(): ?string
+    // {
+    //     return $this->roles;
+    // }
 
     public function setRoles(string $roles): static
     {
@@ -115,7 +142,7 @@ class Employee
         return $this->deactivate;
     }
 
-    
+
     public function setDeactivate(bool $deactivate)
     {
         $this->deactivate = $deactivate;
