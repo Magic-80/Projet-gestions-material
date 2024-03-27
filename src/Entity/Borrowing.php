@@ -96,7 +96,7 @@ class Borrowing
 
     public function getManage(): ?Employee
     {
-    return $this->manage;
+        return $this->manage;
     }
 
     public function setManage(?Employee $manage): self

@@ -4,12 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Employee;
 use App\Form\UserType;
+use App\Repository\BorrowingRepository;
 use App\Repository\EmployeeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
@@ -34,7 +38,7 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/register', name: 'user_register')]
+    #[Route('/create', name: 'user_register')]
     public function create(Request $request): Response
     {
         $user = new Employee();
@@ -64,8 +68,8 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Encoder le mot de passe avant de l'enregistrer en base de données (si nécessaire)
-            // $encodedPassword = password_hash($user->getPassword(), PASSWORD_DEFAULT);
-            // $user->setPassword($encodedPassword);
+            $encodedPassword = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+            $user->setPassword($encodedPassword);
 
             $this->entityManager->flush();
 
@@ -76,5 +80,61 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+    #[Route('/profile/{id}', name: 'profile')]
+    public function showProfile(Employee $user, BorrowingRepository $borrowingRepository): Response
+    {
+        // Récupérer les emprunts gérés par l'utilisateur
+        $managedBorrowings = $borrowingRepository->findBy(['manage' => $user]);
+
+        // Récupérer les emprunts où l'utilisateur est l'emprunteur
+        $borrowedBorrowings = $borrowingRepository->findBy(['borrow' => $user]);
+
+        return $this->render('user/profile.html.twig', [
+            'user' => $user,
+            'managedBorrowings' => $managedBorrowings,
+            'borrowedBorrowings' => $borrowedBorrowings,
+        ]);
+    }
+    #[Route('/register', name: 'register')]
+    public function register(Request $request): Response
+    {
+        $employee = new Employee();
+        $form = $this->createForm(UserType::class, $employee);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $encodedPassword = password_hash($employee->getPassword(), PASSWORD_DEFAULT);
+            $employee->setPassword($encodedPassword);
+
+            $this->entityManager->persist($employee);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render('user/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    #[Route('/login', name: 'login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // Récupérer l'erreur de connexion s'il y en a une
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // Dernier nom d'utilisateur saisi par l'utilisateur
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('user/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ]);
+    }
+
+    #[Route('/logout', name: 'logout')]
+    public function logout()
+    {
+        // Le gestionnaire de déconnexion sera automatiquement géré par Symfony
+        throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 }

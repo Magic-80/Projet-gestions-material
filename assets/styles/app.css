@@ -271,3 +271,7 @@ a {
   align-items: flex-start;
   padding-left: 60px;
 }
+
+.flex {
+  display: flex;
+}
