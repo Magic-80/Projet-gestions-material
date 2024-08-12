@@ -2,6 +2,14 @@
 
 **Gestionnaire de Matériel** est une application métier conçue pour gérer le stock de matériel sur le campus d'Amiens de La Manu. Ce projet a pour but de simplifier la gestion du matériel, des emprunteurs, et des emprunts, tout en offrant une vue d'ensemble via un tableau de bord.
 
+## 🖼️ Aperçu du Jeu
+
+Voici un aperçu du site :
+
+![Aperçu emprunt ](apercuEmprunt.png)
+
+![Aperçu Gestion user ](apercuGestionUSER.png)
+
 ## 🎯 Contexte
 
 La Manu a besoin d'un outil de gestion de stock pour le matériel présent sur ses campus. Ce projet est développé pour le campus d'Amiens et est destiné à différents types d'utilisateurs, dont les administrateurs, les enseignants, le personnel administratif, et le directeur du campus.
