@@ -57,10 +57,3 @@ La Manu a besoin d'un outil de gestion de stock pour le matériel présent sur s
 | Gestion des emprunts            | ☑️              | ☑️          | ❌                      | ❌          |
 | Gestion des classes             | ☑️              | ❌          | ☑️                      | ❌          |
 | Tableau de bord                 | ☑️              | ❌          | ❌                      | ☑️          |
-
-## 📂 Livrables
-
-- **Code source** : Disponible sur [GitHub](https://github.com/votre-nom-utilisateur/gestionnaire-de-materiel) (remplacez ce lien par le lien réel de votre dépôt).
-- **Documentation** : Documentation sur la mise en route et les fonctionnalités de l’application.
-- **Données tests et fixtures** : Fichiers nécessaires pour tester les fonctionnalités de l’application.
-- **Tableau de bord de gestion de projet** : Suivi du projet via [Notion](https://notion.so), [Trello](https://trello.com), ou [GitHub Projects](https://github.com/features/projects) (choisissez et ajoutez le lien pertinent).
